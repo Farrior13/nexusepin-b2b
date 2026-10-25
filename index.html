@@ -1186,6 +1186,15 @@ print(resp.json())`,
     }
 
     function openModal() {
+      const btn = document.getElementById('m-submit-btn');
+      const statusBox = document.getElementById('m-status');
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Send Application to sales@nexusepin.shop →';
+      }
+      if (statusBox) {
+        statusBox.style.display = 'none';
+      }
       document.getElementById('onboard-modal').classList.add('open');
     }
     function closeModal() {
@@ -1222,10 +1231,12 @@ print(resp.json())`,
           },
           body: JSON.stringify({
             _subject: `Nexus E-Pin B2B Application: ${comp} (${vol})`,
+            _captcha: 'false',
             company_or_storefront: comp,
             partnership_type: type,
             monthly_volume_usd: vol,
             partner_contact: contact,
+            submitted_at: new Date().toISOString(),
             source_domain: 'nexusepin.shop'
           })
         });
@@ -1235,7 +1246,8 @@ print(resp.json())`,
         statusBox.style.border = '1px solid rgba(16, 185, 129, 0.4)';
         statusBox.style.color = '#6ee7b7';
         statusBox.innerHTML = '<strong>✅ Application Received!</strong> Your request has been delivered to <strong>sales@nexusepin.shop</strong>. Our B2B Desk will contact you shortly.';
-        btn.textContent = 'Submitted ✓';
+        btn.textContent = 'Submitted ✓ (Click to Send Another)';
+        btn.disabled = false;
       } catch (err) {
         const subject = encodeURIComponent(`B2B Application: ${comp} (${vol})`);
         const body = encodeURIComponent(`Company / Storefront: ${comp}\nPartnership Type: ${type}\nMonthly Volume: ${vol}\nContact: ${contact}\n\nPlease issue B2B API credentials and wholesale tier allocation.`);
