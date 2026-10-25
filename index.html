@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus E-Pin (nexusepin.shop) — Enterprise B2B Game Voucher & API Distribution</title>
+  <meta name="description" content="Institutional-grade B2B digital voucher distribution and automated direct top-up API for PUBG Mobile UC, Razer Gold, Steam, PSN, and App Store across MENA, CIS, and Global markets." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #05070e;
+      --bg-secondary: #0b0f1d;
+      --bg-card: rgba(15, 22, 41, 0.72);
+      --bg-card-hover: rgba(22, 32, 58, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(99, 102, 241, 0.45);
+      --text-main: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-primary: #6366f1;
+      --accent-secondary: #06b6d4;
+      --accent-gold: #f59e0b;
+      --accent-emerald: #10b981;
+      --gradient-brand: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+      --shadow-glow: 0 0 60px -15px rgba(99, 102, 241, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(99, 102, 241, 0.16) 0%, transparent 40%),
+        radial-gradient(circle at 85% 18%, rgba(6, 182, 212, 0.12) 0%, transparent 38%),
+        radial-gradient(circle at 50% 75%, rgba(139, 92, 246, 0.09) 0%, transparent 45%);
+    }
+
+    /* Top Status Bar */
+    .topbar {
+      background: rgba(8, 12, 24, 0.9);
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      padding: 0.55rem 1.5rem;
+    }
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 500;
+      color: #e2e8f0;
+    }
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.25); opacity: 0.65; }
+    }
+    .topbar-metrics {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.74rem;
+    }
+    .topbar-metrics span strong {
+      color: var(--text-main);
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 7, 14, 0.78);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--gradient-brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fff;
+      box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.6);
+    }
+    .brand-text {
+      font-weight: 800;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+    }
+    .brand-text span {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-sub {
+      display: block;
+      font-size: 0.68rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: -3px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .lang-switch {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 2px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.62rem 1.25rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.22s ease;
+    }
+    .btn-primary {
+      background: var(--gradient-brand);
+      color: #fff;
+      box-shadow: 0 8px 25px -6px rgba(99, 102, 241, 0.65);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px -6px rgba(99, 102, 241, 0.85);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+      border-color: var(--border-subtle);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.38rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.35);
+      color: #a5b4fc;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 4vw, 3.45rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(95deg, #818cf8 0%, #38bdf8 55%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 1.08rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .stat-box h4 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-main);
+    }
+    .stat-box p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Right Hero Card: Instant B2B Quote Calculator */
+    .quote-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-highlight);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+    .quote-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .quote-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .live-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .select-input, .num-input {
+      width: 100%;
+      background: rgba(8, 12, 24, 0.9);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.75rem 0.95rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .select-input:focus, .num-input:focus {
+      border-color: var(--accent-primary);
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+    .calc-result {
+      background: rgba(99, 102, 241, 0.09);
+      border: 1px solid rgba(99, 102, 241, 0.28);
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 1.1rem 0;
+    }
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.45rem;
+    }
+    .calc-row.total {
+      margin-top: 0.6rem;
+      padding-top: 0.6rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .calc-row strong {
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff;
+    }
+    .profit-hl {
+      color: #34d399 !important;
+    }
+
+    /* Section Containers */
+    .section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 2.75rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    /* Live Wholesale Catalog Table */
+    .catalog-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .tab-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: 9px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(99, 102, 241, 0.18);
+      color: #fff;
+      border-color: var(--accent-primary);
+    }
+    .table-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow-x: auto;
+      backdrop-filter: blur(12px);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    th {
+      padding: 1rem 1.25rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(8, 12, 24, 0.6);
+    }
+    td {
+      padding: 1rem 1.25rem;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      vertical-align: middle;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .sku-name {
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .sku-tag {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      background: rgba(6, 182, 212, 0.14);
+      color: #22d3ee;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .mono-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+    .vip-price {
+      color: #34d399;
+      font-weight: 700;
+    }
+    .stock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #a7f3d0;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: transform 0.22s, border-color 0.22s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-highlight);
+    }
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(99, 102, 241, 0.14);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1.1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Developer API Section */
+    .api-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .api-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+    .api-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+    }
+    .api-list li strong {
+      color: var(--text-main);
+    }
+    .code-window {
+      background: #070a14;
+      border: 1px solid var(--border-highlight);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+    }
+    .code-header {
+      background: rgba(15, 22, 41, 0.9);
+      padding: 0.75rem 1.1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .code-tabs {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .code-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .code-tab.active {
+      background: rgba(99, 102, 241, 0.25);
+      color: #fff;
+    }
+    pre {
+      padding: 1.35rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: #e2e8f0;
+    }
+
+    /* Partner Contact / KYB Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.85) 0%, rgba(15, 23, 42, 0.92) 100%);
+      border: 1px solid var(--border-highlight);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      box-shadow: var(--shadow-glow);
+    }
+    .cta-banner h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .cta-banner p {
+      color: var(--text-secondary);
+      max-width: 580px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(4, 6, 12, 0.95);
+      padding: 3rem 1.5rem 2rem;
+      margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 5, 11, 0.82);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 1.5rem;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal {
+      background: #0d1326;
+      border: 1px solid var(--border-highlight);
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 2rem;
+      box-shadow: var(--shadow-glow);
+    }
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 960px) {
+      .hero, .api-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .topbar-metrics {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Live Infrastructure Bar -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="status-pill">
+        <span class="pulse-dot"></span>
+        <span data-i18n="status_text">All B2B Fulfillment Gateways Operational (Midasbuy Global & Direct UID)</span>
+      </div>
+      <div class="topbar-metrics">
+        <span>API v2 Latency: <strong>38ms</strong></span>
+        <span>24h Stock: <strong>18,420+ E-Pins</strong></span>
+        <span>Settlement: <strong>USDT (TRC20 / BEP20 / Base)</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <div class="brand-icon">N</div>
+        <div>
+          <div class="brand-text">NEXUS<span>EPIN</span></div>
+          <span class="brand-sub">B2B WHOLESALE INFRASTRUCTURE</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#catalog" data-i18n="nav_catalog">Live Wholesale Catalog</a></li>
+        <li><a href="#infrastructure" data-i18n="nav_infra">Supply Infrastructure</a></li>
+        <li><a href="#api" data-i18n="nav_api">REST API v2</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">B2B Desk</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+          <button class="lang-btn" onclick="setLang('ru')" id="btn-ru">RU</button>
+        </div>
+        <button class="btn btn-primary" onclick="openModal()" data-i18n="btn_onboard">Partner Onboarding</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge">
+        <span>⚡</span>
+        <span data-i18n="hero_badge">Direct B2B E-Pin Aggregator & Wholesale Desk</span>
+      </div>
+      <h1 data-i18n="hero_title">
+        Institutional Wholesale Supply for <span class="highlight">PUBG Mobile UC & Global Game Vouchers</span>
+      </h1>
+      <p data-i18n="hero_desc">
+        Nexus E-Pin powers digital marketplaces, high-volume Telegram storefronts, and regional resellers across MENA, CIS, and Europe with sub-second REST API code delivery and guaranteed wholesale margin tiers.
+      </p>
+      <div class="hero-cta">
+        <a href="#catalog" class="btn btn-primary" data-i18n="hero_btn_catalog">View Live Wholesale Rates →</a>
+        <a href="mailto:sales@nexusepin.shop?subject=B2B%20Wholesale%20Partnership%20%E2%80%94%20Nexus%20E-Pin" class="btn btn-outline">
+          <span>✉️</span> sales@nexusepin.shop
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-box">
+          <h4>&lt; 0.4s</h4>
+          <p data-i18n="stat_1">Mean E-Pin API Dispatch</p>
+        </div>
+        <div class="stat-box">
+          <h4>99.98%</h4>
+          <p data-i18n="stat_2">Voucher Validity SLA</p>
+        </div>
+        <div class="stat-box">
+          <h4>$1.8M+</h4>
+          <p data-i18n="stat_3">Monthly B2B Volume</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Wholesale Quote & Margin Calculator -->
+    <div class="quote-panel">
+      <div class="quote-header">
+        <div class="quote-title">
+          <span>📊</span>
+          <span data-i18n="calc_title">Live B2B Batch Estimator</span>
+        </div>
+        <span class="live-tag">LIVE STOCK</span>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="calc_sku_label">Select Denomination (Global Midasbuy Code / UID)</label>
+        <select class="select-input" id="calc-sku" onchange="updateQuote()">
+          <option value="60" data-std="0.85" data-vip="0.84" data-mkt="0.88">PUBG Mobile — 60 UC Global Code</option>
+          <option value="325" data-std="4.25" data-vip="4.20" data-mkt="4.40">PUBG Mobile — 325 UC Global Code</option>
+          <option value="660" data-std="8.50" data-vip="8.40" data-mkt="8.80">PUBG Mobile — 660 UC Global Code</option>
+          <option value="1800" data-std="21.10" data-vip="20.80" data-mkt="22.00" selected>PUBG Mobile — 1800 UC Global Pack</option>
+          <option value="3850" data-std="42.20" data-vip="41.80" data-mkt="44.00">PUBG Mobile — 3850 UC Global Pack</option>
+          <option value="8100" data-std="83.50" data-vip="82.50" data-mkt="87.00">PUBG Mobile — 8100 UC Global Pack</option>
+        </select>
+      </div>
+
+      <div class="calc-grid">
+        <div class="form-group">
+          <label data-i18n="calc_qty_label">Batch Quantity (Units)</label>
+          <input type="number" class="num-input" id="calc-qty" value="50" min="1" max="10000" oninput="updateQuote()" />
+        </div>
+        <div class="form-group">
+          <label data-i18n="calc_tier_label">Partner Tier</label>
+          <select class="select-input" id="calc-tier" onchange="updateQuote()">
+            <option value="vip">VIP Wholesale ($5k+/mo)</option>
+            <option value="std">Standard B2B ($500+/mo)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result">
+        <div class="calc-row">
+          <span data-i18n="calc_unit_rate">Your Nexus B2B Unit Price:</span>
+          <strong id="res-unit">$20.80 USDT</strong>
+        </div>
+        <div class="calc-row">
+          <span data-i18n="calc_bench_rate">Avg. Market Reseller Rate:</span>
+          <strong id="res-mkt" style="text-decoration: line-through; color: #94a3b8;">$22.00 USDT</strong>
+        </div>
+        <div class="calc-row">
+          <span data-i18n="calc_savings">Your Instant Arbitrage Spread:</span>
+          <strong id="res-spread" class="profit-hl">+$60.00 (+5.45%)</strong>
+        </div>
+        <div class="calc-row total">
+          <span data-i18n="calc_total">Total Batch Settlement:</span>
+          <strong id="res-total">$1,040.00 USDT</strong>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%;" onclick="openModal()" data-i18n="calc_btn">
+        Lock Rate & Request API Allocation
+      </button>
+    </div>
+  </section>
+
+  <!-- Live Wholesale Price Sheet Section -->
+  <section class="section" id="catalog">
+    <div class="section-header">
+      <h2 data-i18n="cat_title">Live B2B Wholesale Rate Sheet</h2>
+      <p data-i18n="cat_desc">
+        Real-time inventory and settlement rates for verified storefronts, Telegram bots, and marketplace merchants. All codes are official Global region with 12-month shelf validity.
+      </p>
+    </div>
+
+    <div class="catalog-controls">
+      <div class="tab-group">
+        <button class="tab-btn active" onclick="filterCatalog('all', this)">All Products (9)</button>
+        <button class="tab-btn" onclick="filterCatalog('pubg_code', this)">PUBG Mobile E-Pins (6)</button>
+        <button class="tab-btn" onclick="filterCatalog('uid_topup', this)">Direct UID Top-Up (3)</button>
+      </div>
+      <div style="font-size: 0.82rem; color: var(--text-secondary);">
+        Settlement Currency: <strong style="color: #fff;">USD / USDT (0% Gateway Fee)</strong>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>SKU / Product Name</th>
+            <th>Delivery Mode</th>
+            <th>Market Avg</th>
+            <th>Standard B2B</th>
+            <th>VIP Partner Tier</th>
+            <th>Live Stock</th>
+          </tr>
+        </thead>
+        <tbody id="catalog-body">
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 60 UC <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$0.88</td>
+            <td class="mono-price">$0.85</td>
+            <td class="mono-price vip-price">$0.84</td>
+            <td><span class="stock-badge">● 14,200+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 325 UC (300+25) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$4.40</td>
+            <td class="mono-price">$4.25</td>
+            <td class="mono-price vip-price">$4.20</td>
+            <td><span class="stock-badge">● 1,490+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 660 UC (600+60) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$8.80</td>
+            <td class="mono-price">$8.50</td>
+            <td class="mono-price vip-price">$8.40</td>
+            <td><span class="stock-badge">● 1,410+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 1800 UC (1500+300) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$22.00</td>
+            <td class="mono-price">$21.10</td>
+            <td class="mono-price vip-price">$20.80</td>
+            <td><span class="stock-badge">● 890+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 3850 UC (3000+850) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$44.00</td>
+            <td class="mono-price">$42.20</td>
+            <td class="mono-price vip-price">$41.80</td>
+            <td><span class="stock-badge">● 1,140+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 8100 UC (6000+2100) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$87.00</td>
+            <td class="mono-price">$83.50</td>
+            <td class="mono-price vip-price">$82.50</td>
+            <td><span class="stock-badge">● 1,160+ pcs</span></td>
+          </tr>
+          <tr data-cat="uid_topup">
+            <td><div class="sku-name">PUBG Mobile — 1800 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
+            <td>Player ID Direct Fulfillment</td>
+            <td class="mono-price" style="color: var(--text-muted);">$21.50</td>
+            <td class="mono-price">$20.60</td>
+            <td class="mono-price vip-price">$20.30</td>
+            <td><span class="stock-badge">● Unlimited</span></td>
+          </tr>
+          <tr data-cat="uid_topup">
+            <td><div class="sku-name">PUBG Mobile — 3850 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
+            <td>Player ID Direct Fulfillment</td>
+            <td class="mono-price" style="color: var(--text-muted);">$43.00</td>
+            <td class="mono-price">$41.20</td>
+            <td class="mono-price vip-price">$40.60</td>
+            <td><span class="stock-badge">● Unlimited</span></td>
+          </tr>
+          <tr data-cat="uid_topup">
+            <td><div class="sku-name">PUBG Mobile — 8100 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
+            <td>Player ID Direct Fulfillment</td>
+            <td class="mono-price" style="color: var(--text-muted);">$85.00</td>
+            <td class="mono-price">$81.50</td>
+            <td class="mono-price vip-price">$80.40</td>
+            <td><span class="stock-badge">● Unlimited</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Infrastructure & Why Nexus Section -->
+  <section class="section" id="infrastructure">
+    <div class="section-header">
+      <h2 data-i18n="infra_title">Built for High-Frequency Digital Merchants</h2>
+      <p data-i18n="infra_desc">
+        Multi-aggregator routing combines Tier-1 distributor allocations, regional carrier billing pools, and Razer Gold treasury settlement into one unified API.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 data-i18n="feat_1_t">Multi-Pool Smart Routing</h3>
+        <p data-i18n="feat_1_d">
+          Orders automatically route across primary and reserve wholesale pools so your storefront never experiences out-of-stock failures during Royal Pass peaks.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <h3 data-i18n="feat_2_t">100% Clean Official Origin</h3>
+        <p data-i18n="feat_2_d">
+          Every 18-digit Midasbuy voucher and direct top-up is sourced from authorized regional distributors with zero chargeback or account-ban risk.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <h3 data-i18n="feat_3_t">Instant Crypto Treasury</h3>
+        <p data-i18n="feat_3_d">
+          24/7 automated balance top-ups via USDT (TRC20, BEP20, Arbitrum, Base) and USDC with instant ledger credit and zero rolling reserves.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer REST API v2 Section -->
+  <section class="section" id="api">
+    <div class="api-grid">
+      <div>
+        <div class="hero-badge">REST API v2 &amp; Webhooks</div>
+        <h2 style="font-size: 2.1rem; font-weight: 800; margin-bottom: 1rem;" data-i18n="api_title">
+          Integrate in 15 Minutes. Fulfill 24/7.
+        </h2>
+        <p style="color: var(--text-secondary);" data-i18n="api_desc">
+          Connect your Telegram bot, FunPay/Plati/G2G auto-delivery script, or custom storefront directly to our REST API with idempotent order execution.
+        </p>
+        <ul class="api-list">
+          <li><span>✅</span> <div><strong>Idempotent Order Protection:</strong> Pass <code>Idempotency-Key</code> headers to prevent duplicate charges on network retries.</div></li>
+          <li><span>✅</span> <div><strong>Signed HMAC Webhooks:</strong> Real-time <code>order.completed</code> notifications for asynchronous UID top-ups.</div></li>
+          <li><span>✅</span> <div><strong>Batch E-Pin Pulls:</strong> Fetch up to 100 voucher codes per single API request in under 400ms.</div></li>
+        </ul>
+      </div>
+
+      <div class="code-window">
+        <div class="code-header">
+          <div class="window-dots">
+            <span style="background: #ef4444;"></span>
+            <span style="background: #f59e0b;"></span>
+            <span style="background: #10b981;"></span>
+          </div>
+          <div class="code-tabs">
+            <button class="code-tab active" onclick="showCode('curl', this)">cURL</button>
+            <button class="code-tab" onclick="showCode('python', this)">Python</button>
+            <button class="code-tab" onclick="showCode('json', this)">Response</button>
+          </div>
+        </div>
+        <pre id="code-display">curl -X POST "https://api.nexusepin.shop/api/v2/giftcards/order" \
+  -H "X-API-Key: nxs_live_98a7f6c2e41b09d3" \
+  -H "Idempotency-Key: ord-2026-10-25-001" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "category_id": "pubg_mobile",
+    "card_id": "1800_uc",
+    "quantity": 10
+  }'</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / B2B Desk CTA -->
+  <section class="section" id="contact">
+    <div class="cta-banner">
+      <div>
+        <h3 data-i18n="cta_title">Ready to Scale Your UC & E-Pin Volume?</h3>
+        <p data-i18n="cta_desc">
+          Apply for a wholesale partner account or connect with our B2B Procurement & Distribution Desk for custom volume rebates and upstream supplier partnerships.
+        </p>
+      </div>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="openModal()" data-i18n="cta_btn_apply">Open Wholesale Account</button>
+        <a href="mailto:sales@nexusepin.shop" class="btn btn-outline">sales@nexusepin.shop</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong style="color: #fff;">NEXUSEPIN.SHOP</strong> — Nexus E-Pin Digital Distribution &amp; API Aggregation.<br />
+        <span>Official B2B Desk &amp; Supplier Relations: <a href="mailto:sales@nexusepin.shop" style="color: #818cf8; text-decoration: none;">sales@nexusepin.shop</a></span>
+      </div>
+      <div>
+        &copy; 2026 Nexus E-Pin Wholesale. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Partner Onboarding Modal -->
+  <div class="modal-backdrop" id="onboard-modal">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>B2B Partner &amp; Supplier Application</h3>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+        Submit your details below to receive API credentials or connect with our procurement desk at <strong>sales@nexusepin.shop</strong>.
+      </p>
+      <div class="form-group">
+        <label>Company / Storefront Name</label>
+        <input type="text" class="num-input" id="m-company" placeholder="e.g. Apex Gaming Store" />
+      </div>
+      <div class="form-group">
+        <label>Partnership Type</label>
+        <select class="select-input" id="m-type">
+          <option value="Wholesale Buyer (API / Bulk Codes)">Wholesale Buyer (API / Bulk Codes)</option>
+          <option value="Upstream B2B Distributor / Supplier">Upstream B2B Distributor / Supplier</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Estimated Monthly Volume (USD / USDT)</label>
+        <select class="select-input" id="m-vol">
+          <option value="$1,000 - $5,000 / month">$1,000 – $5,000 / month</option>
+          <option value="$5,000 - $25,000 / month" selected>$5,000 – $25,000 / month (VIP Tier)</option>
+          <option value="$25,000+ / month">$25,000+ / month (Enterprise Desk)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Telegram or Corporate Email</label>
+        <input type="text" class="num-input" id="m-contact" placeholder="@username or name@company.com" />
+      </div>
+      <div id="m-status" style="display:none; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.86rem; margin-bottom: 0.75rem;"></div>
+      <button class="btn btn-primary" id="m-submit-btn" style="width: 100%; margin-top: 0.5rem;" onclick="submitApplication()">
+        Send Application to sales@nexusepin.shop →
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const codeSnippets = {
+      curl: `curl -X POST "https://api.nexusepin.shop/api/v2/giftcards/order" \\
+  -H "X-API-Key: nxs_live_98a7f6c2e41b09d3" \\
+  -H "Idempotency-Key: ord-2026-10-25-001" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "category_id": "pubg_mobile",
+    "card_id": "1800_uc",
+    "quantity": 10
+  }'`,
+      python: `import requests
+
+resp = requests.post(
+    "https://api.nexusepin.shop/api/v2/giftcards/order",
+    headers={
+        "X-API-Key": "nxs_live_98a7f6c2e41b09d3",
+        "Idempotency-Key": "ord-2026-10-25-001"
+    },
+    json={"category_id": "pubg_mobile", "card_id": "1800_uc", "quantity": 10}
+)
+print(resp.json())`,
+      json: `{
+  "ok": true,
+  "order_id": "ord-849201",
+  "status": "completed",
+  "category_id": "pubg_mobile",
+  "card_id": "1800_uc",
+  "quantity": 10,
+  "unit_price_usd": "20.8000",
+  "total_usd": "208.0000",
+  "codes": [
+    "5J8K-9L2M-4N7P-8Q1R-3T",
+    "7H2D-6F9G-1K4L-5M8N-9P"
+  ]
+}`
+    };
+
+    function showCode(lang, btn) {
+      document.getElementById('code-display').textContent = codeSnippets[lang];
+      document.querySelectorAll('.code-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function updateQuote() {
+      const sel = document.getElementById('calc-sku');
+      const opt = sel.options[sel.selectedIndex];
+      const qty = Math.max(1, parseInt(document.getElementById('calc-qty').value || '1', 10));
+      const tier = document.getElementById('calc-tier').value;
+
+      const unit = parseFloat(opt.getAttribute(tier === 'vip' ? 'data-vip' : 'data-std'));
+      const mkt = parseFloat(opt.getAttribute('data-mkt'));
+      const total = unit * qty;
+      const spread = (mkt - unit) * qty;
+      const pct = ((mkt - unit) / mkt) * 100;
+
+      document.getElementById('res-unit').textContent = `$${unit.toFixed(2)} USDT`;
+      document.getElementById('res-mkt').textContent = `$${mkt.toFixed(2)} USDT`;
+      document.getElementById('res-spread').textContent = `+$${spread.toFixed(2)} (+${pct.toFixed(2)}%)`;
+      document.getElementById('res-total').textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})} USDT`;
+    }
+
+    function filterCatalog(cat, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('#catalog-body tr').forEach(row => {
+        row.style.display = (cat === 'all' || row.getAttribute('data-cat') === cat) ? '' : 'none';
+      });
+    }
+
+    function openModal() {
+      document.getElementById('onboard-modal').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('onboard-modal').classList.remove('open');
+    }
+
+    async function submitApplication() {
+      const comp = (document.getElementById('m-company').value || '').trim() || 'B2B Partner';
+      const type = document.getElementById('m-type').value;
+      const vol = document.getElementById('m-vol').value;
+      const contact = (document.getElementById('m-contact').value || '').trim();
+      const statusBox = document.getElementById('m-status');
+      const btn = document.getElementById('m-submit-btn');
+
+      if (!contact) {
+        statusBox.style.display = 'block';
+        statusBox.style.background = 'rgba(239, 68, 68, 0.15)';
+        statusBox.style.border = '1px solid rgba(239, 68, 68, 0.4)';
+        statusBox.style.color = '#fca5a5';
+        statusBox.textContent = 'Please enter your Telegram (@username) or corporate email so our B2B desk can reply.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting Application to B2B Desk...';
+      statusBox.style.display = 'none';
+
+      try {
+        const res = await fetch('https://formsubmit.co/ajax/sales@nexusepin.shop', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `Nexus E-Pin B2B Application: ${comp} (${vol})`,
+            company_or_storefront: comp,
+            partnership_type: type,
+            monthly_volume_usd: vol,
+            partner_contact: contact,
+            source_domain: 'nexusepin.shop'
+          })
+        });
+        const data = await res.json();
+        statusBox.style.display = 'block';
+        statusBox.style.background = 'rgba(16, 185, 129, 0.15)';
+        statusBox.style.border = '1px solid rgba(16, 185, 129, 0.4)';
+        statusBox.style.color = '#6ee7b7';
+        statusBox.innerHTML = '<strong>✅ Application Received!</strong> Your request has been delivered to <strong>sales@nexusepin.shop</strong>. Our B2B Desk will contact you shortly.';
+        btn.textContent = 'Submitted ✓';
+      } catch (err) {
+        const subject = encodeURIComponent(`B2B Application: ${comp} (${vol})`);
+        const body = encodeURIComponent(`Company / Storefront: ${comp}\nPartnership Type: ${type}\nMonthly Volume: ${vol}\nContact: ${contact}\n\nPlease issue B2B API credentials and wholesale tier allocation.`);
+        window.location.href = `mailto:sales@nexusepin.shop?subject=${subject}&body=${body}`;
+        btn.disabled = false;
+        btn.textContent = 'Send Application to sales@nexusepin.shop →';
+      }
+    }
+
+    const i18n = {
+      en: {
+        status_text: "All B2B Fulfillment Gateways Operational (Midasbuy Global & Direct UID)",
+        nav_catalog: "Live Wholesale Catalog",
+        nav_infra: "Supply Infrastructure",
+        nav_api: "REST API v2",
+        nav_contact: "B2B Desk",
+        btn_onboard: "Partner Onboarding",
+        hero_badge: "Direct B2B E-Pin Aggregator & Wholesale Desk",
+        hero_title: 'Institutional Wholesale Supply for <span class="highlight">PUBG Mobile UC & Global Game Vouchers</span>',
+        hero_desc: "Nexus E-Pin powers digital marketplaces, high-volume Telegram storefronts, and regional resellers across MENA, CIS, and Europe with sub-second REST API code delivery and guaranteed wholesale margin tiers.",
+        hero_btn_catalog: "View Live Wholesale Rates →",
+        calc_title: "Live B2B Batch Estimator",
+        cat_title: "Live B2B Wholesale Rate Sheet",
+        infra_title: "Built for High-Frequency Digital Merchants",
+        api_title: "Integrate in 15 Minutes. Fulfill 24/7.",
+        cta_title: "Ready to Scale Your UC & E-Pin Volume?"
+      },
+      ru: {
+        status_text: "Все B2B-шлюзы отгрузки работают штатно (Midasbuy Global и прямое пополнение по UID)",
+        nav_catalog: "Оптовый прайс-лист",
+        nav_infra: "Инфраструктура",
+        nav_api: "REST API v2",
+        nav_contact: "B2B Отдел",
+        btn_onboard: "Подключить B2B",
+        hero_badge: "Прямой B2B-дистрибьютор и агрегатор E-Pin кодов",
+        hero_title: 'Оптовые поставки <span class="highlight">PUBG Mobile UC и цифровых кодов</span> по API',
+        hero_desc: "Nexus E-Pin обеспечивает селлеров маркетплейсов, крупные Telegram-магазины и региональных дистрибьюторов мгновенной отгрузкой официальных кодов Midasbuy Global и прямым пополнением по UID с расчётом в USDT.",
+        hero_btn_catalog: "Открыть оптовый прайс →",
+        calc_title: "Калькулятор оптовой партии",
+        cat_title: "Актуальный оптовый прайс-лист (B2B)",
+        infra_title: "Инфраструктура для крупных селлеров и магазинов",
+        api_title: "Интеграция по API за 15 минут. Отгрузка 24/7.",
+        cta_title: "Готовы подключить оптовый тариф или обсудить объём?"
+      }
+    };
+
+    function setLang(lang) {
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.innerHTML = dict[key];
+      });
+    }
+  </script>
+</body>
+</html>
