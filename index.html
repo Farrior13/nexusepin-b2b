@@ -811,12 +811,14 @@
       <div class="form-group">
         <label data-i18n="calc_sku_label">Select Denomination (Global Midasbuy Code / UID)</label>
         <select class="select-input" id="calc-sku" onchange="updateQuote()">
-          <option value="60" data-std="0.85" data-vip="0.84" data-mkt="0.88">PUBG Mobile — 60 UC Global Code</option>
-          <option value="325" data-std="4.25" data-vip="4.20" data-mkt="4.40">PUBG Mobile — 325 UC Global Code</option>
-          <option value="660" data-std="8.50" data-vip="8.40" data-mkt="8.80">PUBG Mobile — 660 UC Global Code</option>
-          <option value="1800" data-std="21.10" data-vip="20.80" data-mkt="22.00" selected>PUBG Mobile — 1800 UC Global Pack</option>
-          <option value="3850" data-std="42.20" data-vip="41.80" data-mkt="44.00">PUBG Mobile — 3850 UC Global Pack</option>
-          <option value="8100" data-std="83.50" data-vip="82.50" data-mkt="87.00">PUBG Mobile — 8100 UC Global Pack</option>
+          <option value="60" data-std="0.88" data-vip="0.88" data-mkt="0.95">PUBG Mobile — 60 UC Global Code</option>
+          <option value="120" data-std="1.76" data-vip="1.76" data-mkt="1.90">PUBG Mobile — 120 UC Global Code</option>
+          <option value="180" data-std="2.64" data-vip="2.64" data-mkt="2.85">PUBG Mobile — 180 UC Global Code</option>
+          <option value="325" data-std="4.40" data-vip="4.40" data-mkt="4.75">PUBG Mobile — 325 UC Global Code</option>
+          <option value="660" data-std="8.80" data-vip="8.80" data-mkt="9.50">PUBG Mobile — 660 UC Global Code</option>
+          <option value="1800" data-std="22.00" data-vip="21.00" data-mkt="23.80" selected>PUBG Mobile — 1800 UC Global Pack</option>
+          <option value="3850" data-std="44.00" data-vip="43.00" data-mkt="47.50">PUBG Mobile — 3850 UC Global Pack</option>
+          <option value="8100" data-std="87.00" data-vip="85.00" data-mkt="94.00">PUBG Mobile — 8100 UC Global Pack</option>
         </select>
       </div>
 
@@ -828,8 +830,8 @@
         <div class="form-group">
           <label data-i18n="calc_tier_label">Partner Tier</label>
           <select class="select-input" id="calc-tier" onchange="updateQuote()">
-            <option value="vip">VIP Wholesale ($5k+/mo)</option>
-            <option value="std">Standard B2B ($500+/mo)</option>
+            <option value="vip">VIP / Bulk Rate ($10k+/mo)</option>
+            <option value="std">Standard B2B ($1k+/mo)</option>
           </select>
         </div>
       </div>
@@ -837,19 +839,19 @@
       <div class="calc-result">
         <div class="calc-row">
           <span data-i18n="calc_unit_rate">Your Nexus B2B Unit Price:</span>
-          <strong id="res-unit">$20.80 USDT</strong>
+          <strong id="res-unit">$21.00 USDT</strong>
         </div>
         <div class="calc-row">
-          <span data-i18n="calc_bench_rate">Avg. Market Reseller Rate:</span>
-          <strong id="res-mkt" style="text-decoration: line-through; color: #94a3b8;">$22.00 USDT</strong>
+          <span data-i18n="calc_bench_rate">Avg. Retail / Reseller Rate:</span>
+          <strong id="res-mkt" style="text-decoration: line-through; color: #94a3b8;">$23.80 USDT</strong>
         </div>
         <div class="calc-row">
           <span data-i18n="calc_savings">Your Instant Arbitrage Spread:</span>
-          <strong id="res-spread" class="profit-hl">+$60.00 (+5.45%)</strong>
+          <strong id="res-spread" class="profit-hl">+$140.00 (+11.76%)</strong>
         </div>
         <div class="calc-row total">
           <span data-i18n="calc_total">Total Batch Settlement:</span>
-          <strong id="res-total">$1,040.00 USDT</strong>
+          <strong id="res-total">$1,050.00 USDT</strong>
         </div>
       </div>
 
@@ -895,73 +897,89 @@
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 60 UC <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$0.88</td>
-            <td class="mono-price">$0.85</td>
-            <td class="mono-price vip-price">$0.84</td>
+            <td class="mono-price" style="color: var(--text-muted);">$0.95</td>
+            <td class="mono-price">$0.88</td>
+            <td class="mono-price vip-price">$0.88</td>
             <td><span class="stock-badge">● 14,200+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 120 UC (2×60) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$1.90</td>
+            <td class="mono-price">$1.76</td>
+            <td class="mono-price vip-price">$1.76</td>
+            <td><span class="stock-badge">● 7,100+ pcs</span></td>
+          </tr>
+          <tr data-cat="pubg_code">
+            <td><div class="sku-name">PUBG Mobile — 180 UC (3×60) <span class="sku-tag">GLOBAL PIN</span></div></td>
+            <td>Instant 18-Digit Code (API)</td>
+            <td class="mono-price" style="color: var(--text-muted);">$2.85</td>
+            <td class="mono-price">$2.64</td>
+            <td class="mono-price vip-price">$2.64</td>
+            <td><span class="stock-badge">● 4,700+ pcs</span></td>
           </tr>
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 325 UC (300+25) <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$4.40</td>
-            <td class="mono-price">$4.25</td>
-            <td class="mono-price vip-price">$4.20</td>
+            <td class="mono-price" style="color: var(--text-muted);">$4.75</td>
+            <td class="mono-price">$4.40</td>
+            <td class="mono-price vip-price">$4.40</td>
             <td><span class="stock-badge">● 1,490+ pcs</span></td>
           </tr>
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 660 UC (600+60) <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$8.80</td>
-            <td class="mono-price">$8.50</td>
-            <td class="mono-price vip-price">$8.40</td>
+            <td class="mono-price" style="color: var(--text-muted);">$9.50</td>
+            <td class="mono-price">$8.80</td>
+            <td class="mono-price vip-price">$8.80</td>
             <td><span class="stock-badge">● 1,410+ pcs</span></td>
           </tr>
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 1800 UC (1500+300) <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$22.00</td>
-            <td class="mono-price">$21.10</td>
-            <td class="mono-price vip-price">$20.80</td>
+            <td class="mono-price" style="color: var(--text-muted);">$23.80</td>
+            <td class="mono-price">$22.00</td>
+            <td class="mono-price vip-price">$21.00</td>
             <td><span class="stock-badge">● 890+ pcs</span></td>
           </tr>
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 3850 UC (3000+850) <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$44.00</td>
-            <td class="mono-price">$42.20</td>
-            <td class="mono-price vip-price">$41.80</td>
+            <td class="mono-price" style="color: var(--text-muted);">$47.50</td>
+            <td class="mono-price">$44.00</td>
+            <td class="mono-price vip-price">$43.00</td>
             <td><span class="stock-badge">● 1,140+ pcs</span></td>
           </tr>
           <tr data-cat="pubg_code">
             <td><div class="sku-name">PUBG Mobile — 8100 UC (6000+2100) <span class="sku-tag">GLOBAL PIN</span></div></td>
             <td>Instant 18-Digit Code (API)</td>
-            <td class="mono-price" style="color: var(--text-muted);">$87.00</td>
-            <td class="mono-price">$83.50</td>
-            <td class="mono-price vip-price">$82.50</td>
+            <td class="mono-price" style="color: var(--text-muted);">$94.00</td>
+            <td class="mono-price">$87.00</td>
+            <td class="mono-price vip-price">$85.00</td>
             <td><span class="stock-badge">● 1,160+ pcs</span></td>
           </tr>
           <tr data-cat="uid_topup">
             <td><div class="sku-name">PUBG Mobile — 1800 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
             <td>Player ID Direct Fulfillment</td>
-            <td class="mono-price" style="color: var(--text-muted);">$21.50</td>
-            <td class="mono-price">$20.60</td>
-            <td class="mono-price vip-price">$20.30</td>
+            <td class="mono-price" style="color: var(--text-muted);">$23.50</td>
+            <td class="mono-price">$22.00</td>
+            <td class="mono-price vip-price">$21.00</td>
             <td><span class="stock-badge">● Unlimited</span></td>
           </tr>
           <tr data-cat="uid_topup">
             <td><div class="sku-name">PUBG Mobile — 3850 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
             <td>Player ID Direct Fulfillment</td>
-            <td class="mono-price" style="color: var(--text-muted);">$43.00</td>
-            <td class="mono-price">$41.20</td>
-            <td class="mono-price vip-price">$40.60</td>
+            <td class="mono-price" style="color: var(--text-muted);">$47.00</td>
+            <td class="mono-price">$44.00</td>
+            <td class="mono-price vip-price">$43.00</td>
             <td><span class="stock-badge">● Unlimited</span></td>
           </tr>
           <tr data-cat="uid_topup">
             <td><div class="sku-name">PUBG Mobile — 8100 UC Direct UID <span class="sku-tag">AUTO TOP-UP</span></div></td>
             <td>Player ID Direct Fulfillment</td>
-            <td class="mono-price" style="color: var(--text-muted);">$85.00</td>
-            <td class="mono-price">$81.50</td>
-            <td class="mono-price vip-price">$80.40</td>
+            <td class="mono-price" style="color: var(--text-muted);">$93.00</td>
+            <td class="mono-price">$87.00</td>
+            <td class="mono-price vip-price">$85.00</td>
             <td><span class="stock-badge">● Unlimited</span></td>
           </tr>
         </tbody>
